@@ -1,39 +1,151 @@
-const dotenv = require("dotenv");
-dotenv.config();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { Auth, User } = require("../models");
+const authController = require("../controllers/authController");
 
-const request = require("supertest");
-const app = require("../server");
+jest.mock("bcrypt");
+jest.mock("jsonwebtoken");
+jest.mock("../models");
 
-// unit testing
-// const AuthMiddlewares = require('../middlewares/authenticate')
+describe("Auth Controller", () => {
+  let mockReq, mockRes, mockNext;
 
-// before() => run 1x diawal test case, utk semua test case
-// beforeEach() => run SETIAP diawal test case, utk semua test case
-// after() => run 1x diakhir test case
-// afterEach() => run SETIAP diakhir test case, utk semua test case
-
-describe("API LOGIN TEST", () => {
-  it("success login", async () => {
-    const user = {
-      email: "imam123@mail.com",
-      password: "Dummy123",
+  beforeEach(() => {
+    mockReq = { body: {}, headers: {}, user: null };
+    mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
     };
-    const response = await request(app).post("/api/v1/auth/login").send(user);
-    expect(response.statusCode).toBe(200);
-    //   expect(response.body)
+    mockNext = jest.fn();
   });
 
-  it("failed login", async () => {
-    const user = {
-      email: "imam21412412@mail.com",
-      password: "imam21412412",
-    };
-    const response = await request(app).post("/api/v1/auth/login").send(user);
-    console.log(response.body);
-    expect(response.statusCode).toBe(400);
-    expect(response.body.status).toBe("Failed");
-    expect(response.body.message).toBe(
-      "wrong password atau user doesn't exist"
-    );
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe("register", () => {
+    it("should register a new user successfully", async () => {
+      mockReq.body = {
+        name: "Test User",
+        email: "test@example.com",
+        password: "password123",
+        age: 25,
+        address: "123 Test Street",
+      };
+      Auth.findOne.mockResolvedValue(null);
+      bcrypt.hashSync.mockReturnValue("hashedpassword");
+      User.create.mockResolvedValue({ id: 1, name: "Test User" });
+      Auth.create.mockResolvedValue({ id: 1 });
+
+      await authController.register(mockReq, mockRes, mockNext);
+
+      expect(Auth.findOne).toHaveBeenCalledWith({
+        where: { email: "test@example.com" },
+      });
+      expect(bcrypt.hashSync).toHaveBeenCalledWith("password123", 10);
+      expect(User.create).toHaveBeenCalledWith({
+        name: "Test User",
+        address: "123 Test Street",
+        age: 25,
+        shopId: 1,
+      });
+      expect(Auth.create).toHaveBeenCalledWith({
+        email: "test@example.com",
+        password: "hashedpassword",
+        userId: 1,
+      });
+      expect(mockRes.status).toHaveBeenCalledWith(201);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        status: "Success",
+        data: {
+          email: "test@example.com",
+          newUser: expect.any(Object),
+        },
+      });
+    });
+
+    it("should return 400 if email already exists", async () => {
+      mockReq.body = { email: "test@example.com" };
+      Auth.findOne.mockResolvedValue({ id: 1 });
+
+      await authController.register(mockReq, mockRes, mockNext);
+
+      expect(mockNext).toHaveBeenCalledWith(
+        expect.objectContaining({
+          message: "User email already taken",
+          statusCode: 400,
+        })
+      );
+    });
+  });
+
+  describe("login", () => {
+    it("should login successfully and return a token", async () => {
+      mockReq.body = { email: "test@example.com", password: "password123" };
+      Auth.findOne.mockResolvedValue({
+        email: "test@example.com",
+        password: "hashedpassword",
+        User: { id: 1, name: "Test User", role: "Admin" },
+      });
+      bcrypt.compareSync.mockReturnValue(true);
+      jwt.sign.mockReturnValue("testtoken");
+
+      await authController.login(mockReq, mockRes, mockNext);
+
+      expect(Auth.findOne).toHaveBeenCalledWith({
+        where: { email: "test@example.com" },
+        include: ["User"],
+      });
+      expect(bcrypt.compareSync).toHaveBeenCalledWith(
+        "password123",
+        "hashedpassword"
+      );
+      expect(jwt.sign).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: 1,
+          username: "Test User",
+          role: "Admin",
+          email: "test@example.com",
+        }),
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRED }
+      );
+      expect(mockRes.status).toHaveBeenCalledWith(200);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        status: "Success",
+        message: "Success login",
+        data: "testtoken",
+      });
+    });
+
+    it("should return 400 if password is incorrect or user doesn't exist", async () => {
+      mockReq.body = { email: "test@example.com", password: "wrongpassword" };
+      Auth.findOne.mockResolvedValue(null);
+
+      await authController.login(mockReq, mockRes, mockNext);
+
+      expect(mockNext).toHaveBeenCalledWith(
+        expect.objectContaining({
+          message: "wrong password atau user doesn't exist",
+          statusCode: 400,
+        })
+      );
+    });
+  });
+
+  describe("authenticate", () => {
+    it("should return the authenticated user", async () => {
+      mockReq.user = { id: 1, name: "Test User" };
+
+      await authController.authenticate(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(200);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        status: "Success",
+        data: {
+          user: { id: 1, name: "Test User" },
+        },
+      });
+    });
   });
 });
