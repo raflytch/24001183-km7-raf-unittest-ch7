@@ -1,0 +1,313 @@
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert("Shops", [
+      {
+        name: "Toko Suzette",
+        city: "Bandung",
+        createdAt: "2021-12-08T12:43:59 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Renee",
+        city: "Bandung",
+        createdAt: "2023-09-06T07:23:19 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Mattie",
+        city: "Jakarta",
+        createdAt: "2021-11-29T10:24:31 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Collier",
+        city: "Surabaya",
+        createdAt: "2021-10-07T12:39:04 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Brady",
+        city: "Bali",
+        createdAt: "2023-03-03T10:38:30 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Conley",
+        city: "Jakarta",
+        createdAt: "2021-05-28T05:21:44 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Janette",
+        city: "Bali",
+        createdAt: "2021-02-20T09:45:19 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Rocha",
+        city: "Bandung",
+        createdAt: "2020-12-27T08:11:28 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Jill",
+        city: "Jakarta",
+        createdAt: "2022-03-17T05:51:21 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Fuller",
+        city: "Jakarta",
+        createdAt: "2024-02-06T01:23:54 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Elvia",
+        city: "Surabaya",
+        createdAt: "2020-06-26T01:45:03 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Gloria",
+        city: "Jakarta",
+        createdAt: "2022-05-20T08:58:48 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Harmon",
+        city: "Bandung",
+        createdAt: "2022-08-31T09:29:42 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Susanna",
+        city: "Bandung",
+        createdAt: "2024-04-08T01:02:13 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Grant",
+        city: "Bali",
+        createdAt: "2023-03-18T06:24:12 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Bridges",
+        city: "Surabaya",
+        createdAt: "2023-11-19T06:17:47 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Graham",
+        city: "Bali",
+        createdAt: "2023-01-09T04:31:15 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Pansy",
+        city: "Bali",
+        createdAt: "2020-12-24T11:29:54 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Thelma",
+        city: "Surabaya",
+        createdAt: "2021-08-04T10:27:06 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Cash",
+        city: "Bali",
+        createdAt: "2022-07-20T07:25:15 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Deena",
+        city: "Bandung",
+        createdAt: "2020-04-01T05:32:31 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Haney",
+        city: "Jakarta",
+        createdAt: "2020-10-07T12:32:56 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Oneill",
+        city: "Bandung",
+        createdAt: "2020-05-05T01:59:25 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Sherrie",
+        city: "Surabaya",
+        createdAt: "2023-01-16T07:00:52 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Morgan",
+        city: "Bandung",
+        createdAt: "2023-11-26T07:00:40 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Wynn",
+        city: "Jakarta",
+        createdAt: "2022-02-18T07:55:01 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Elise",
+        city: "Bandung",
+        createdAt: "2022-12-26T02:54:48 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Sandoval",
+        city: "Surabaya",
+        createdAt: "2023-06-13T04:49:21 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Tommie",
+        city: "Bali",
+        createdAt: "2021-02-07T06:26:21 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Daphne",
+        city: "Bali",
+        createdAt: "2022-05-13T04:43:01 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Cecile",
+        city: "Surabaya",
+        createdAt: "2021-11-27T08:25:25 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Hull",
+        city: "Bali",
+        createdAt: "2024-02-06T06:04:48 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Savage",
+        city: "Surabaya",
+        createdAt: "2021-10-10T09:55:34 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Ruth",
+        city: "Jakarta",
+        createdAt: "2020-11-10T06:10:56 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Chelsea",
+        city: "Bali",
+        createdAt: "2020-05-26T07:29:46 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Peck",
+        city: "Jakarta",
+        createdAt: "2020-05-02T01:31:37 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Black",
+        city: "Jakarta",
+        createdAt: "2021-10-04T01:50:50 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Brandy",
+        city: "Surabaya",
+        createdAt: "2020-02-02T06:26:20 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Gomez",
+        city: "Bali",
+        createdAt: "2022-10-18T09:20:23 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Herman",
+        city: "Bali",
+        createdAt: "2021-05-07T08:16:29 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Bryan",
+        city: "Surabaya",
+        createdAt: "2020-06-13T05:56:54 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Lavonne",
+        city: "Surabaya",
+        createdAt: "2023-09-03T06:19:34 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Maddox",
+        city: "Bandung",
+        createdAt: "2022-08-23T03:43:54 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Blankenship",
+        city: "Surabaya",
+        createdAt: "2021-05-27T11:27:58 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Gretchen",
+        city: "Surabaya",
+        createdAt: "2023-03-02T01:02:10 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Hilda",
+        city: "Bandung",
+        createdAt: "2023-03-15T09:29:00 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Virginia",
+        city: "Bali",
+        createdAt: "2022-05-24T01:05:02 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Tamera",
+        city: "Jakarta",
+        createdAt: "2023-07-17T01:33:13 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Alexis",
+        city: "Bandung",
+        createdAt: "2023-09-07T06:07:30 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+      {
+        name: "Toko Frank",
+        city: "Bandung",
+        createdAt: "2023-11-02T10:01:20 -07:00",
+        updatedAt: "2024-04-14T02:02:31 -07:00",
+      },
+    ]);
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("Shops", null, {});
+  },
+};
